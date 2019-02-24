@@ -33,10 +33,8 @@ public class ArrayStorage {
 
     Resume get(String uuid) {
         for (int lCount = 0; lCount < sizeOfStorage; lCount++){
-            if (storage[lCount] != null){
-                if (uuid.equals(storage[lCount].uuid)){
-                    return storage[lCount];
-                }
+            if (uuid.equals(storage[lCount].uuid)){
+                return storage[lCount];
             }
         }
         return null;
