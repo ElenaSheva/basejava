@@ -45,10 +45,8 @@ public class ArrayStorage {
             return -1;
         }
         for (int lCount = 0; lCount < sizeOfStorage; lCount++){
-            if (storage[lCount] != null){
-                if (uuid.equals(storage[lCount].uuid)){
-                    return lCount;
-                }
+            if (uuid.equals(storage[lCount].uuid)){
+                return lCount;
             }
         }
         return -1;
