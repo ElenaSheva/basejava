@@ -13,15 +13,15 @@ public class ArrayStorage {
         sizeOfStorage = 0;
     }
 
-    void save(Resume r) {
-        if (sizeOfStorage == MAX_STORAGE_SIZE){
+    void save(Resume resumeToSave) {
+        if (sizeOfStorage == MAX_STORAGE_SIZE - 1){
             System.out.println("Array is full!");
         } else {
-            if (r.uuid != null){
-                if (get(r.uuid) != null){
+            if (resumeToSave.uuid != null){
+                if (getIndex(resumeToSave.uuid) != -1){
                     System.out.println("Resume exist in Array!");
                 } else {
-                    storage[sizeOfStorage] = r;
+                    storage[sizeOfStorage] = resumeToSave;
                     sizeOfStorage++;
                 }
             } else {
@@ -40,7 +40,16 @@ public class ArrayStorage {
         return null;
     }
 
-    private int getIndex(String uuid){
+    void delete(String uuid) {
+        int lResumeIndex = getIndex(uuid);
+        if (lResumeIndex != -1){
+            storage[lResumeIndex] = storage[sizeOfStorage - 1];
+            storage[sizeOfStorage - 1] = null;
+            sizeOfStorage--;
+        }
+    }
+
+    private int getIndex(String uuid) {
         if (uuid == null){
             return -1;
         }
@@ -50,15 +59,6 @@ public class ArrayStorage {
             }
         }
         return -1;
-    }
-
-    void delete(String uuid) {
-        int lResumeIndex = getIndex(uuid);
-        if (lResumeIndex != -1){
-            storage[lResumeIndex] = storage[sizeOfStorage - 1];
-            storage[sizeOfStorage - 1] = null;
-            sizeOfStorage--;
-        }
     }
 
     /**
