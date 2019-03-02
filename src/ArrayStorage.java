@@ -2,8 +2,7 @@
  * Array based storage for Resumes
  */
 public class ArrayStorage {
-    int MAX_STORAGE_SIZE = 10_000;
-    Resume[] storage = new Resume[MAX_STORAGE_SIZE];
+    Resume[] storage = new Resume[10_000];
     int sizeOfStorage = 0;
 
     void clear() {
@@ -13,31 +12,30 @@ public class ArrayStorage {
         sizeOfStorage = 0;
     }
 
+    void update(Resume resumeToUpdate) {
+        int lIndex = getIndex(resumeToUpdate.uuid);
+        if (lIndex != -1) {
+            storage[lIndex] = resumeToUpdate;
+            System.out.println("Resume '" + resumeToUpdate.uuid + "' is updated!");
+        }
+    }
+
     void save(Resume resumeToSave) {
-        if (sizeOfStorage == MAX_STORAGE_SIZE - 1){
+        if (sizeOfStorage == storage.length){
             System.out.println("Array is full!");
         } else {
-            if (resumeToSave.uuid != null){
-                if (getIndex(resumeToSave.uuid) != -1){
-                    System.out.println("Resume exist in Array!");
-                } else {
-                    storage[sizeOfStorage] = resumeToSave;
-                    sizeOfStorage++;
-                }
-            } else {
-                System.out.println("uuid is null! No save!");
+            if (getIndex(resumeToSave.uuid) == -1){
+                storage[sizeOfStorage] = resumeToSave;
+                sizeOfStorage++;
+                System.out.println("Resume is saved!");
             }
         }
 
     }
 
     Resume get(String uuid) {
-        for (int lCount = 0; lCount < sizeOfStorage; lCount++){
-            if (uuid.equals(storage[lCount].uuid)){
-                return storage[lCount];
-            }
-        }
-        return null;
+        int lIndex = getIndex(uuid);
+        return lIndex == -1 ? null : storage[lIndex];
     }
 
     void delete(String uuid) {
@@ -51,6 +49,7 @@ public class ArrayStorage {
 
     private int getIndex(String uuid) {
         if (uuid == null){
+            System.out.println("uuid is null!");
             return -1;
         }
         for (int lCount = 0; lCount < sizeOfStorage; lCount++){
@@ -58,6 +57,7 @@ public class ArrayStorage {
                 return lCount;
             }
         }
+        System.out.println("Resume '" + uuid + "' not exist in Array!");
         return -1;
     }
 
