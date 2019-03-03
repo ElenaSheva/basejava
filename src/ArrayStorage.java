@@ -36,11 +36,11 @@ public class ArrayStorage {
 
     public Resume get(String uuid) {
         int index = getIndex(uuid);
-        if (index == -1) {
+        if (index != -1) {
+            return storage[index];
+        } else {
             System.out.println("Resume '" + uuid + "' not exist in Array!");
             return null;
-        } else {
-            return storage[index];
         }
     }
 
@@ -55,18 +55,6 @@ public class ArrayStorage {
         }
     }
 
-    private int getIndex(String uuid) {
-        if (uuid == null) {
-            return -1;
-        }
-        for (int сount = 0; сount < sizeOfStorage; сount++) {
-            if (uuid.equals(storage[сount].getUuid())) {
-                return сount;
-            }
-        }
-        return -1;
-    }
-
     /**
      * @return array, contains only Resumes in storage (without null)
      */
@@ -78,5 +66,17 @@ public class ArrayStorage {
 
     public int size() {
         return sizeOfStorage;
+    }
+
+    private int getIndex(String uuid) {
+        if (uuid == null) {
+            return -1;
+        }
+        for (int сount = 0; сount < sizeOfStorage; сount++) {
+            if (uuid.equals(storage[сount].getUuid())) {
+                return сount;
+            }
+        }
+        return -1;
     }
 }
