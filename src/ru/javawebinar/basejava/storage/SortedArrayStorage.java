@@ -23,12 +23,9 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected void insertElement(Resume resume, int index) {
-        if (index < 0) {
-            // this is a new value to insert (not a duplicate).
-            index = -index - 1;
-        }
-        System.arraycopy(storage, index, storage, index + 1, size - index);
-        storage[index] = resume;
+        int indexNew = -index - 1;
+        System.arraycopy(storage, indexNew, storage, indexNew + 1, size - indexNew);
+        storage[indexNew] = resume;
     }
 
 }
