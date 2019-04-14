@@ -1,8 +1,10 @@
 package ru.javawebinar.basejava.storage;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import ru.javawebinar.basejava.model.Resume;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage {
@@ -49,8 +51,9 @@ public class ListStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return listResume.toArray(new Resume[listResume.size()]);
+    public List<Resume> getAllSorted() {
+        Collections.sort(listResume);
+        return listResume;
     }
 
     @Override
