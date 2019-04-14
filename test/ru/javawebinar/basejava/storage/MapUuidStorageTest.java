@@ -5,10 +5,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import ru.javawebinar.basejava.model.Resume;
 
-public class MapStorageTest extends AbstractArrayStorageTest {
+public class MapUuidStorageTest extends AbstractArrayStorageTest {
 
-    public MapStorageTest() {
-        super(new MapStorage());
+    public MapUuidStorageTest() {
+        super(new MapUuidStorage());
     }
 
     @Override
